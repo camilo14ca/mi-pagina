@@ -1,41 +1,50 @@
 body {
-    background-color: #f4f7f6;
-    color: #1b2a27;
-    font-family: Arial, Helvetica, sans-serif;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 20px;
+  background-color: #f4f7f6;
+  color: #1b2a27;
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 h1 {
-    font-size: 48px;
-    color: #0a6c50;
+  font-size: 48px;
+  color: #0a6c50;
 }
 
 h2 {
-    color: #0a6c50;
+  color: #0a6c50;
+  margin-top: 32px;
+}
+
+h1, h2 {
+  text-transform: uppercase;
 }
 
 a {
-    color: #0a6c50;
-}
-
-h1, h2 { 
-    text-transform: uppercase;
+  color: #0a6c50;
 }
 
 .boton {
-    background-color: #0a6c50;
-    color: white;
-    padding: 12px 20px;
-    text-decoration: none;
-    border-radius: 6px;
-    display: inline-block;
+  background-color: #0a6c50;
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  display: inline-block;
 }
 
 .boton:hover {
-    background-color: #084f3a;
+  background-color: #084f3a;
 }
+
+button.boton {
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 8px 8px 0;
+}
+
 .paquetes {
   display: flex;
   flex-wrap: wrap;
@@ -49,16 +58,14 @@ h1, h2 {
   border-radius: 10px;
   padding: 16px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s; 
   box-sizing: border-box;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 
-.tarjeta:hover {                   
+.tarjeta:hover {
   transform: translateY(-4px);
-}
-
-h2 {
-  margin-top: 32px;
 }
 
 .tarjeta h3 {
@@ -67,7 +74,8 @@ h2 {
 }
 
 .tarjeta .boton {
-  margin-top: 8px;
+  margin-top: auto;
+  align-self: flex-start;
 }
 
 .precio {
@@ -75,31 +83,25 @@ h2 {
   font-weight: bold;
 }
 
-@media (max-width: 600px){
-    h1{
-        font-size: 32px;
-    }
-
-    body {
-        padding: 16px;
-    }
-    
-    .boton{
-        display: block;
-        text-align: center;
-    }
-}
-
-button.boton{
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 0 8px 8px 0;
-}
-
 input, textarea {
   width: 100%;
   padding: 10px;
   font-size: 16px;
+  font-family: inherit;
   box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  body {
+    padding: 16px;
+  }
+
+  .boton {
+    display: block;
+    text-align: center;
+  }
 }
