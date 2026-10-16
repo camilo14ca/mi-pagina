@@ -1,20 +1,40 @@
+:root {
+  --oscuro: #0b1f3a;
+  --medio: #1b4b82;
+  --principal: #00b894;
+  --acento: #ffb703;
+  --fondo: #f4f7f6;
+  --texto: #1b2a27;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: #f4f7f6;
-  color: #1b2a27;
+  background-color: var(--fondo);
+  color: var(--texto);
   font-family: Arial, Helvetica, sans-serif;
-  max-width: 700px;
+  margin: 0;
+}
+
+section {
+  scroll-margin-top: 60px;
+}
+
+.contenedor {
+  max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 48px 20px;
 }
 
 h1 {
   font-size: 48px;
-  color: #0a6c50;
 }
 
 h2 {
-  color: #0a6c50;
-  margin-top: 32px;
+  color: var(--oscuro);
+  margin-top: 0;
 }
 
 h1, h2 {
@@ -22,12 +42,88 @@ h1, h2 {
 }
 
 a {
-  color: #0a6c50;
+  color: var(--medio);
 }
 
-.boton {
-  background-color: #0a6c50;
+/* MENÚ */
+.menu {
+  background-color: var(--oscuro);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.menu-contenido {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.menu a {
   color: white;
+  text-decoration: none;
+}
+
+.menu nav a {
+  margin-left: 16px;
+}
+
+.menu nav a:hover {
+  color: var(--acento);
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* FRANJAS DE COLOR */
+.hero {
+  background: linear-gradient(135deg, var(--oscuro), var(--medio));
+  color: white;
+}
+
+.hero .contenedor {
+  padding: 80px 20px;
+}
+
+.hero h1 {
+  color: white;
+  margin-top: 0;
+}
+
+.hero p {
+  font-size: 20px;
+  max-width: 600px;
+}
+
+.seccion-blanca {
+  background-color: white;
+}
+
+.seccion-clara {
+  background-color: var(--fondo);
+}
+
+.seccion-oscura {
+  background-color: var(--oscuro);
+  color: white;
+}
+
+.seccion-oscura h2 {
+  color: white;
+}
+
+/* BOTONES */
+.boton {
+  background-color: var(--acento);
+  color: var(--oscuro);
+  font-weight: bold;
   padding: 12px 20px;
   text-decoration: none;
   border-radius: 6px;
@@ -35,7 +131,7 @@ a {
 }
 
 .boton:hover {
-  background-color: #084f3a;
+  background-color: #e0a000;
 }
 
 button.boton {
@@ -45,6 +141,7 @@ button.boton {
   margin: 0 8px 8px 0;
 }
 
+/* TARJETAS */
 .paquetes {
   display: flex;
   flex-wrap: wrap;
@@ -53,15 +150,16 @@ button.boton {
 
 .tarjeta {
   flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border: 1px solid #d5e3df;
+  border-top: 4px solid var(--principal);
   border-radius: 10px;
   padding: 16px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
   transition: transform 0.2s;
-  display: flex;
-  flex-direction: column;
 }
 
 .tarjeta:hover {
@@ -70,7 +168,7 @@ button.boton {
 
 .tarjeta h3 {
   margin-top: 0;
-  color: #0a6c50;
+  color: var(--oscuro);
 }
 
 .tarjeta .boton {
@@ -83,6 +181,7 @@ button.boton {
   font-weight: bold;
 }
 
+/* FORMULARIO */
 input, textarea {
   width: 100%;
   padding: 10px;
@@ -91,13 +190,18 @@ input, textarea {
   box-sizing: border-box;
 }
 
+/* CELULAR (siempre al final) */
 @media (max-width: 600px) {
   h1 {
     font-size: 32px;
   }
 
-  body {
-    padding: 16px;
+  .contenedor {
+    padding: 32px 16px;
+  }
+
+  .hero .contenedor {
+    padding: 56px 16px;
   }
 
   .boton {
