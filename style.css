@@ -36,6 +36,30 @@ h1, h2 {
 .boton:hover {
     background-color: #084f3a;
 }
+.paquetes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.tarjeta {
+  flex: 1 1 200px;
+  background-color: white;
+  border: 1px solid #d5e3df;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.tarjeta h3 {
+  margin-top: 0;
+  color: #0a6c50;
+}
+
+.precio {
+  font-size: 20px;
+  font-weight: bold;
+}
 
 @media (max-width: 600px){
     h1{
