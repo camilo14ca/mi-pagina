@@ -50,15 +50,24 @@ h1, h2 {
   padding: 16px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s; 
+  box-sizing: border-box;
 }
 
 .tarjeta:hover {                   
   transform: translateY(-4px);
 }
 
+h2 {
+  margin-top: 32px;
+}
+
 .tarjeta h3 {
   margin-top: 0;
   color: #0a6c50;
+}
+
+.tarjeta .boton {
+  margin-top: 8px;
 }
 
 .precio {
