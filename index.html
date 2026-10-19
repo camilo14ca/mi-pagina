@@ -4,79 +4,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> LOGIK PRAGMA </title>
+    <title>LOGIK PRAGMA</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Logik Pragma</h1>
-    <p>Solo el que se pone en marcha alcanza las metas; el que espera, se queda atrás.
-        ¿qué esperas para ponerte en marcha? </p>
 
-    <h2> Servicios </h2>
-    <ul>
-        <li>Páginas web</li>
-        <li>Sistemas de inventario</li>
-        <li>Software para proyectos de grado</li>
-    </ul>
-
-    <a href="https://github.com/camilo14ca">Mira mis proyectos en GitHub</a>
-
-    <h2>Paquetes</h2>
-    <div class="paquetes">
-
-        <div class="tarjeta">
-            <h3>Página web</h3>
-            <p>Tu negocio en internet, con diseño adaptable a celular y botón de WhatsApp.</p>
-            <p class="precio">Desde $600.000 COP</p>
-            <a class="boton"
-                href="https://wa.me/573212474073?text=Hola%2C%20quiero%20cotizar%20una%20p%C3%A1gina%20web">Cotizar</a>
+    <!-- MENÚ -->
+    <header class="menu">
+        <div class="menu-contenido">
+            <a class="logo" href="#inicio">
+                <img src="img/logo-icono-claro.svg" alt="" width="28" height="28">
+                Logik Pragma
+            </a>
+            <nav>
+                <a href="#inicio">Inicio</a>
+                <a href="#nosotros">Quiénes somos</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#contacto">Contáctenos</a>
+            </nav>
         </div>
+    </header>
 
-        <div class="tarjeta">
-            <h3>Sistema de inventario</h3>
-            <p>Controla productos, entradas, salidas y alertas de stock bajo.</p>
-            <p class="precio">Desde $1.200.000 COP</p>
-            <a class="boton"
-                href="https://wa.me/573212474073?text=Hola%2C%20quiero%20cotizar%20un%20sistema%20de%20inventario">Cotizar</a>
+    <!-- INICIO -->
+    <section id="inicio" class="hero">
+        <div class="contenedor">
+            <h1>Logik Pragma</h1>
+            <p>Solo el que se pone en marcha alcanza las metas; el que espera, se queda atrás.
+                ¿Qué esperas para ponerte en marcha?</p>
+            <a class="boton" href="#contacto">Cotiza tu proyecto</a>
         </div>
+    </section>
 
-        <div class="tarjeta">
-            <h3>Software para proyecto de grado</h3>
-            <p>Desarrollamos el software contigo. Tú redactas tu documento y sustentas tu trabajo.</p>
-            <p class="precio">Desde $900.000 COP</p>
-            <a class="boton"
-                href="https://wa.me/573212474073?text=Hola%2C%20quiero%20cotizar%20software%20para%20mi%20proyecto%20de%20grado">Cotizar</a>
+    <!-- QUIÉNES SOMOS -->
+    <section id="nosotros" class="seccion-blanca">
+        <div class="contenedor">
+            <h2>Quiénes somos</h2>
+            <div class="nosotros-grid">
+                <div class="nosotros-texto">
+                    <p>Somos un equipo de desarrolladores de Cúcuta que crea páginas web y sistemas de
+                        inventario para negocios, y software para proyectos de grado.</p>
+                    <p>Escuchamos tu idea, te cotizamos con claridad y te entregamos un proyecto funcionando.</p>
+                </div>
+                <img class="foto" src="img/nosotros.jpg" alt="Desarrollador trabajando frente a su computador">
+            </div>
         </div>
+    </section>
 
-    </div>
+    <!-- SERVICIOS Y PAQUETES -->
+    <section id="servicios" class="seccion-clara">
+        <div class="contenedor">
+            <h2>Servicios</h2>
+            <ul>
+                <li>Páginas web</li>
+                <li>Sistemas de inventario</li>
+                <li>Software para proyectos de grado</li>
+            </ul>
 
-    <h2>Cómo trabajamos</h2>
-    <ol>
-        <li>Nos cuentas tu idea por WhatsApp.</li>
-        <li>Te enviamos una cotización clara, con alcance y fecha de entrega.</li>
-        <li>Pagas el 50% para empezar y el 50% al entregar.</li>
-        <li>Te entregamos tu proyecto funcionando, con soporte.</li>
-    </ol>
+            <a href="https://github.com/camilo14ca">Mira mis proyectos en GitHub</a>
 
-    <h2>Demo de inventario</h2>
-    <p>Hamburguesas disponibles: <strong id="stock">10</strong></p>
-    <p id="aviso"></p>
-    <button class="boton" id="vender">Vender 1</button>
-    <button class="boton" id="reponer">Reponer 1</button>
+            <h2 class="separado">Paquetes</h2>
+            <p>Cada proyecto es distinto. Cuéntanos tu idea y te enviamos una cotización a tu medida.</p>
 
-    <h2>Contacto</h2>
+            <div class="paquetes">
 
-    <label for="nombre">Tu nombre</label><br>
-    <input type="text" id="nombre" placeholder="Ej: Laura"><br><br>
+                <div class="tarjeta">
+                    <div class="icono">🌐</div>
+                    <h3>Página web</h3>
+                    <ul>
+                        <li>Diseño adaptable a celular</li>
+                        <li>Botón de WhatsApp</li>
+                        <li>Publicada en internet con tu enlace</li>
+                    </ul>
+                    <a class="boton"
+                        href="https://wa.me/573212474073?text=Hola%2C%20quiero%20cotizar%20una%20p%C3%A1gina%20web">Cotizar mi página</a>
+                </div>
 
-    <label for="necesidad">¿Qué necesitas?</label><br>
-    <textarea id="necesidad" rows="4" placeholder="Ej: una página para mi negocio"></textarea><br><br>
+                <div class="tarjeta">
+                    <div class="icono">📦</div>
+                    <h3>Sistema de inventario</h3>
+                    <ul>
+                        <li>Productos, entradas y salidas</li>
+                        <li>Alertas de stock bajo</li>
+                        <li>Usuarios y roles</li>
+                    </ul>
+                    <a class="boton"
+                        href="https://wa.me/573212474073?text=Hola%2C%20quiero%20cotizar%20un%20sistema%20de%20inventario">Cotizar mi sistema</a>
+                </div>
 
-    <button class="boton" id="enviar">Enviar por WhatsApp</button>
+                <div class="tarjeta">
+                    <div class="icono">🎓</div>
+                    <h3>Software para proyecto de grado</h3>
+                    <ul>
+                        <li>Software a la medida de tu idea</li>
+                        <li>Acompañamiento en el desarrollo</li>
+                        <li>Tú redactas tu documento y sustentas</li>
+                    </ul>
+                    <a class="boton"
+                        href="https://wa.me/573212474073?text=Hola%2C%20quiero%20cotizar%20software%20para%20mi%20proyecto%20de%20grado">Cotizar mi proyecto</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CÓMO TRABAJAMOS -->
+    <section class="seccion-blanca">
+        <div class="contenedor">
+            <h2>Cómo trabajamos</h2>
+            <ol>
+                <li>Nos cuentas tu idea por WhatsApp.</li>
+                <li>Te enviamos una cotización clara, con alcance y fecha de entrega.</li>
+                <li>Pagas el 50% para empezar y el 50% al entregar.</li>
+                <li>Te entregamos tu proyecto funcionando, con soporte.</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- DEMO -->
+    <section class="seccion-clara">
+        <div class="contenedor">
+            <h2>Demo de inventario</h2>
+            <p>Así funciona un sistema de inventario. Prueba vender y reponer, y mira cómo avisa cuando queda poco stock.</p>
+
+            <div class="demo">
+                <p class="demo-producto">Hamburguesas disponibles</p>
+                <strong id="stock">10</strong>
+                <p id="aviso"></p>
+                <div class="demo-botones">
+                    <button class="boton" id="vender">Vender 1</button>
+                    <button class="boton boton-secundario" id="reponer">Reponer 1</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="seccion-oscura">
+        <div class="contenedor">
+            <h2>Contacto</h2>
+
+            <div class="tarjeta-form">
+                <label for="nombre">Tu nombre</label><br>
+                <input type="text" id="nombre" placeholder="Ej: Laura"><br><br>
+
+                <label for="necesidad">¿Qué necesitas?</label><br>
+                <textarea id="necesidad" rows="4" placeholder="Ej: una página para mi negocio"></textarea><br><br>
+
+                <button class="boton" id="enviar">Enviar por WhatsApp</button>
+            </div>
+        </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
-
 
 </html>

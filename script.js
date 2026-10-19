@@ -1,12 +1,13 @@
 console.log("Hola, Logik Pragma");
 
+// ===== DEMO DE INVENTARIO =====
+const STOCK_MINIMO = 3;
 let stock = 10;
 
 const textoStock = document.getElementById("stock");
 const aviso = document.getElementById("aviso");
 const botonVender = document.getElementById("vender");
 const botonReponer = document.getElementById("reponer");
-const STOCK_MINIMO = 3;
 
 function mostrarStock() {
   if (stock === 0) {
@@ -36,13 +37,19 @@ botonReponer.addEventListener("click", function () {
 
 mostrarStock();
 
+// ===== FORMULARIO -> WHATSAPP =====
 const campoNombre = document.getElementById("nombre");
 const campoNecesidad = document.getElementById("necesidad");
 const botonEnviar = document.getElementById("enviar");
 
 botonEnviar.addEventListener("click", function () {
-  const nombre = campoNombre.value;
-  const necesidad = campoNecesidad.value;
+  const nombre = campoNombre.value.trim();
+  const necesidad = campoNecesidad.value.trim();
+
+  if (nombre === "" || necesidad === "") {
+    alert("Por favor escribe tu nombre y lo que necesitas.");
+    return;
+  }
 
   const mensaje = "Hola, soy " + nombre + ". Necesito: " + necesidad;
   const enlace = "https://wa.me/573212474073?text=" + encodeURIComponent(mensaje);
