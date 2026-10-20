@@ -1,5 +1,70 @@
 console.log("Hola, Logik Pragma");
 
+// ===== ANIMACIONES AL HACER SCROLL =====
+(function () {
+  const sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // 1) Elementos que aparecen al llegar a ellos
+  const lista = document.querySelectorAll(
+    ".encabezado, .nosotros-texto, .foto, .tarjeta, .mas-proyectos, " +
+    ".flujo-sub, .paso, .retorno, .seccion-blanca h2, .demo, .tarjeta-form, .seccion-oscura h2, .contenedor > p"
+  );
+
+  lista.forEach(function (elemento) {
+    if (elemento.closest(".hero")) return;           // el inicio ya anima solo
+    if (elemento.closest(".encabezado") && !elemento.classList.contains("encabezado")) return;
+    elemento.classList.add("revelar");
+    const hermanos = Array.from(elemento.parentElement.children);
+    const posicion = hermanos.indexOf(elemento);
+    elemento.style.setProperty("--delay", (posicion % 4) * 0.12 + "s");
+  });
+
+  const observador = new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (entrada) {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add("visible");
+        observador.unobserve(entrada.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll(".revelar").forEach(function (elemento) {
+    observador.observe(elemento);
+  });
+
+  // 2) Barra de progreso, sombra del menú y efecto de "hundirse" del inicio
+  const barra = document.getElementById("progreso");
+  const menu = document.querySelector(".menu");
+  const hero = document.querySelector(".hero");
+  let pendiente = false;
+
+  function actualizar() {
+    pendiente = false;
+    const y = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    barra.style.transform = "scaleX(" + (total > 0 ? y / total : 0) + ")";
+    menu.classList.toggle("con-sombra", y > 10);
+
+    if (!sinMovimiento && y < hero.offsetHeight) {
+      const avance = y / hero.offsetHeight;          // 0 arriba, 1 al terminar el inicio
+      hero.style.setProperty("--py", y * 0.35 + "px");
+      hero.style.setProperty("--cy", y * 0.3 + "px");
+      hero.style.setProperty("--co", Math.max(0, 1 - avance * 1.3));
+      hero.style.setProperty("--cs", 1 - avance * 0.08);
+    }
+  }
+
+  window.addEventListener("scroll", function () {
+    if (!pendiente) {
+      pendiente = true;
+      requestAnimationFrame(actualizar);
+    }
+  }, { passive: true });
+
+  actualizar();
+  window.animacionesListas = true;
+})();
+
 // ===== DEMO DE INVENTARIO =====
 const STOCK_MINIMO = 3;
 let stock = 10;

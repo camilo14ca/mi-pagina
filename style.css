@@ -122,12 +122,18 @@ a {
     url("img/hero.jpg");
   background-color: var(--oscuro);
   background-size: cover;
-  background-position: center;
+  background-position: center, center calc(50% + var(--py, 0px));
   color: white;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero .contenedor {
-  padding: 96px 20px;
+  padding: 96px 20px 150px;
+  /* se desvanece y "se hunde" al bajar (lo controla script.js) */
+  opacity: var(--co, 1);
+  transform: translateY(var(--cy, 0px)) scale(var(--cs, 1));
+  will-change: transform, opacity;
 }
 
 .hero h1 {
@@ -138,6 +144,57 @@ a {
 .hero p {
   font-size: 20px;
   max-width: 600px;
+}
+
+/* Aparición del texto del inicio, uno tras otro */
+.hero h1,
+.hero p,
+.hero .boton {
+  animation: aparecer 0.8s ease both;
+}
+
+.hero p {
+  animation-delay: 0.2s;
+}
+
+.hero .boton {
+  animation-delay: 0.4s;
+}
+
+/* ----- Olas del corte azul/blanco ----- */
+.ola {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 90px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ola-svg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 200%;
+  height: 100%;
+  animation: ola 18s linear infinite;
+}
+
+.ola-atras {
+  fill: rgba(255, 255, 255, 0.4);
+  animation-duration: 26s;
+  animation-direction: reverse;
+}
+
+.ola-frente {
+  fill: #ffffff;
+}
+
+@keyframes ola {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .seccion-blanca {
@@ -195,8 +252,14 @@ a {
   display: inline-block;
 }
 
+.boton {
+  transition: background-color 0.2s, translate 0.2s, box-shadow 0.2s;
+}
+
 .boton:hover {
   background-color: #e0a000;
+  translate: 0 -2px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
 button.boton {
@@ -204,6 +267,63 @@ button.boton {
   cursor: pointer;
   font-size: 16px;
   margin: 0 8px 8px 0;
+}
+
+/* ========== ENCABEZADO DE SECCIÓN (etiqueta + título + subtítulo) ========== */
+.encabezado {
+  max-width: 640px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.etiqueta {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 6px 14px;
+  background-color: rgba(255, 183, 3, 0.18);
+  color: #8a4b00;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+
+.encabezado h2 {
+  margin-bottom: 0;
+}
+
+.encabezado h2::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin: 14px auto 0;
+  background-color: var(--acento);
+  border-radius: 4px;
+}
+
+.encabezado p {
+  margin: 16px 0 0;
+  color: #5a6b67;
+  font-size: 19px;
+}
+
+.mas-proyectos {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.boton-contorno {
+  background-color: transparent;
+  color: var(--oscuro);
+  border: 2px solid var(--oscuro);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.boton-contorno:hover {
+  background-color: var(--oscuro);
+  color: white;
 }
 
 /* ========== TARJETAS DE PAQUETES (se voltean) ========== */
@@ -546,6 +666,50 @@ input, textarea {
   box-sizing: border-box;
 }
 
+/* ========== ANIMACIONES ========== */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    translate: 0 32px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* Los elementos con .revelar aparecen cuando llegas a ellos (script.js pone .visible) */
+.js .revelar {
+  opacity: 0;
+}
+
+.js .revelar.visible {
+  animation: aparecer 0.7s ease both;
+  animation-delay: var(--delay, 0s);
+}
+
+/* Barra amarilla de progreso arriba */
+.progreso {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 20;
+  background-color: var(--acento);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* Sombra del menú cuando ya bajaste */
+.menu {
+  transition: box-shadow 0.3s;
+}
+
+.menu.con-sombra {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
 /* ========== ACCESIBILIDAD: sin animaciones si el usuario lo pide ========== */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -556,6 +720,23 @@ input, textarea {
   .paso,
   .paso:hover {
     transition: none;
+    transform: none;
+  }
+
+  .ola-svg,
+  .hero h1,
+  .hero p,
+  .hero .boton,
+  .js .revelar.visible {
+    animation: none;
+  }
+
+  .js .revelar {
+    opacity: 1;
+  }
+
+  .hero .contenedor {
+    opacity: 1;
     transform: none;
   }
 }
@@ -606,7 +787,11 @@ input, textarea {
   }
 
   .hero .contenedor {
-    padding: 56px 16px;
+    padding: 56px 16px 110px;
+  }
+
+  .ola {
+    height: 56px;
   }
 
   .boton {
