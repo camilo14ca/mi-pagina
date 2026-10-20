@@ -100,18 +100,6 @@ a {
   transform: translateY(-3px);
 }
 
-.menu-nav a.destacado {
-  background-color: var(--acento);
-  color: var(--oscuro);
-  font-weight: bold;
-}
-
-.menu-nav a.destacado:hover {
-  background-color: #e0a000;
-  color: var(--oscuro);
-  transform: translateY(-3px);
-}
-
 .menu-boton {
   display: none;
   background: transparent;
