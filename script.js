@@ -19,14 +19,28 @@ console.log("Hola, Logik Pragma");
     elemento.style.setProperty("--delay", (posicion % 4) * 0.12 + "s");
   });
 
+  // Dirección del scroll: 1 = bajando, -1 = subiendo
+  let direccion = 1;
+  let ultimoY = window.scrollY;
+
+  function mostrar(elemento) {
+    // si sube, el elemento entra desde arriba; si baja, desde abajo
+    elemento.style.setProperty("--dy", direccion > 0 ? "32px" : "-32px");
+    elemento.classList.remove("visible");
+    void elemento.offsetWidth;                        // reinicia la animación
+    elemento.classList.add("visible");
+  }
+
   const observador = new IntersectionObserver(function (entradas) {
     entradas.forEach(function (entrada) {
-      if (entrada.isIntersecting) {
-        entrada.target.classList.add("visible");
-        observador.unobserve(entrada.target);
+      const elemento = entrada.target;
+      if (!entrada.isIntersecting) {
+        elemento.classList.remove("visible");         // salió: queda listo para animar otra vez
+      } else if (entrada.intersectionRatio >= 0.12 && !elemento.classList.contains("visible")) {
+        mostrar(elemento);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: [0, 0.12] });
 
   document.querySelectorAll(".revelar").forEach(function (elemento) {
     observador.observe(elemento);
@@ -36,11 +50,25 @@ console.log("Hola, Logik Pragma");
   const barra = document.getElementById("progreso");
   const menu = document.querySelector(".menu");
   const hero = document.querySelector(".hero");
+  const curvaRelleno = document.getElementById("curva-relleno");
+  const curvaLinea = document.getElementById("curva-linea");
+  const textosHero = hero.querySelectorAll("h1, p, .boton");
   let pendiente = false;
+  let heroOculto = false;
+
+  function reiniciarTextosHero() {
+    textosHero.forEach(function (texto) {
+      texto.style.animation = "none";
+      void texto.offsetWidth;
+      texto.style.animation = "";
+    });
+  }
 
   function actualizar() {
     pendiente = false;
     const y = window.scrollY;
+    direccion = y >= ultimoY ? 1 : -1;
+    ultimoY = y;
     const total = document.documentElement.scrollHeight - window.innerHeight;
     barra.style.transform = "scaleX(" + (total > 0 ? y / total : 0) + ")";
     menu.classList.toggle("con-sombra", y > 10);
@@ -51,6 +79,22 @@ console.log("Hola, Logik Pragma");
       hero.style.setProperty("--cy", y * 0.3 + "px");
       hero.style.setProperty("--co", Math.max(0, 1 - avance * 1.3));
       hero.style.setProperty("--cs", 1 - avance * 0.08);
+    }
+
+    // El corte azul/blanco se curva más cuanto más bajas (y se aplana al subir)
+    const progreso = Math.min(1, y / (hero.offsetHeight * 0.8));
+    const profundidad = 25 + 55 * progreso;           // 25 arriba -> 80 abajo
+    const control = 100 - 2 * profundidad;
+    const curva = "M0,100 Q720," + control + " 1440,100";
+    curvaLinea.setAttribute("d", curva);
+    curvaRelleno.setAttribute("d", curva + " Z");
+
+    // Al volver arriba, el texto del inicio vuelve a entrar
+    if (y > hero.offsetHeight * 0.6) {
+      heroOculto = true;
+    } else if (y < 10 && heroOculto && !sinMovimiento) {
+      heroOculto = false;
+      reiniciarTextosHero();
     }
   }
 

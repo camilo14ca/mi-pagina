@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIK PRAGMA</title>
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=6">
     <script>
         // Avisa al CSS que hay JavaScript (para las animaciones al hacer scroll)
         document.documentElement.classList.add("js");
@@ -50,13 +50,11 @@
             <a class="boton" href="#contacto">Cotiza tu proyecto</a>
         </div>
 
-        <!-- Olas animadas en el corte azul/blanco -->
+        <!-- Corte curvo azul/blanco: se curva más o menos según el scroll -->
         <div class="ola" aria-hidden="true">
-            <svg class="ola-svg ola-atras" viewBox="0 0 2400 120" preserveAspectRatio="none">
-                <path d="M0,60 C150,110 450,10 600,60 C750,110 1050,10 1200,60 C1350,110 1650,10 1800,60 C1950,110 2250,10 2400,60 L2400,120 L0,120 Z"/>
-            </svg>
-            <svg class="ola-svg ola-frente" viewBox="0 0 2400 120" preserveAspectRatio="none">
-                <path d="M0,80 C200,30 400,110 600,80 C800,30 1000,110 1200,80 C1400,30 1600,110 1800,80 C2000,30 2200,110 2400,80 L2400,120 L0,120 Z"/>
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <path class="ola-relleno" id="curva-relleno" d="M0,100 Q720,40 1440,100 Z"/>
+                <path class="ola-linea" id="curva-linea" d="M0,100 Q720,40 1440,100"/>
             </svg>
         </div>
     </section>
@@ -227,7 +225,7 @@
         </div>
     </section>
 
-    <script src="script.js?v=5"></script>
+    <script src="script.js?v=6"></script>
 </body>
 
 </html>
