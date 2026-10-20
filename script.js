@@ -7,7 +7,7 @@ console.log("Hola, Logik Pragma");
   // 1) Elementos que aparecen al llegar a ellos
   const lista = document.querySelectorAll(
     ".encabezado, .nosotros-texto, .foto, .tarjeta, .mas-proyectos, " +
-    ".flujo-sub, .paso, .retorno, .seccion-blanca h2, .demo, .tarjeta-form, .seccion-oscura h2, .contenedor > p"
+    ".cifras, .flujo-sub, .paso, .retorno, .seccion-blanca h2, .demo, .tarjeta-form, .seccion-oscura h2, .contenedor > p"
   );
 
   lista.forEach(function (elemento) {
@@ -206,3 +206,44 @@ tarjetas.forEach(function (tarjeta) {
     tarjeta.classList.toggle("volteada");
   });
 });
+
+// ===== CIFRAS QUE SUBEN CONTANDO =====
+(function () {
+  const sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const numeros = document.querySelectorAll(".kpi-num");
+
+  function texto(elemento, valor) {
+    const prefijo = elemento.dataset.prefijo || "";
+    const sufijo = elemento.dataset.sufijo || "";
+    elemento.textContent = prefijo + Math.round(valor) + sufijo;
+  }
+
+  function contar(elemento) {
+    const meta = Number(elemento.dataset.valor);
+    if (sinMovimiento) { texto(elemento, meta); return; }
+    const duracion = 1400;
+    const inicio = performance.now();
+    function paso(ahora) {
+      const avance = Math.min(1, (ahora - inicio) / duracion);
+      const suave = 1 - Math.pow(1 - avance, 3);          // empieza rápido y frena al final
+      texto(elemento, meta * suave);
+      if (avance < 1 && elemento.dataset.contando === "si") requestAnimationFrame(paso);
+    }
+    elemento.dataset.contando = "si";
+    requestAnimationFrame(paso);
+  }
+
+  const observador = new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (entrada) {
+      const elemento = entrada.target;
+      if (entrada.isIntersecting && entrada.intersectionRatio >= 0.5) {
+        contar(elemento);
+      } else if (!entrada.isIntersecting) {
+        elemento.dataset.contando = "no";
+        texto(elemento, 0);                               // al salir vuelve a 0 y cuenta de nuevo
+      }
+    });
+  }, { threshold: [0, 0.5] });
+
+  numeros.forEach(function (n) { texto(n, 0); observador.observe(n); });
+})();
