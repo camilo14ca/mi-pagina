@@ -74,3 +74,13 @@ menuNav.addEventListener("click", function (evento) {
     botonMenu.textContent = "☰";
   }
 });
+
+// ===== TARJETAS QUE SE VOLTEAN (en celular, al tocar) =====
+const tarjetas = document.querySelectorAll(".tarjeta");
+tarjetas.forEach(function (tarjeta) {
+  tarjeta.addEventListener("click", function (evento) {
+    if (!window.matchMedia("(hover: none)").matches) return; // en PC lo hace el CSS
+    if (evento.target.tagName === "A") return; // dejar que "Cotiza ya" funcione
+    tarjeta.classList.toggle("volteada");
+  });
+});

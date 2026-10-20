@@ -206,7 +206,7 @@ button.boton {
   margin: 0 8px 8px 0;
 }
 
-/* ========== TARJETAS DE PAQUETES ========== */
+/* ========== TARJETAS DE PAQUETES (se voltean) ========== */
 .paquetes {
   display: flex;
   flex-wrap: wrap;
@@ -216,22 +216,49 @@ button.boton {
 
 .tarjeta {
   flex: 1 1 230px;
+  height: 400px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.tarjeta-interior {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s;
+}
+
+/* En computador: se voltea al pasar el mouse. En celular: al tocar (JS). */
+@media (hover: hover) {
+  .tarjeta:hover .tarjeta-interior {
+    transform: rotateY(180deg);
+  }
+}
+
+.tarjeta:focus-within .tarjeta-interior,
+.tarjeta.volteada .tarjeta-interior {
+  transform: rotateY(180deg);
+}
+
+.cara {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* ----- Cara de adelante ----- */
+.frente {
   display: flex;
   flex-direction: column;
+  padding: 24px;
   background-color: white;
   border: 1px solid #d5e3df;
   border-top: 4px solid var(--principal);
-  border-radius: 12px;
-  padding: 24px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  box-sizing: border-box;
-  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-}
-
-.tarjeta:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 14px 30px rgba(11, 31, 58, 0.18);
-  border-top-color: var(--acento);
 }
 
 .icono {
@@ -243,12 +270,6 @@ button.boton {
   font-size: 26px;
   background-color: #e6f7f3;
   border-radius: 50%;
-  transition: transform 0.25s, background-color 0.25s;
-}
-
-.tarjeta:hover .icono {
-  background-color: var(--acento);
-  transform: scale(1.1) rotate(-6deg);
 }
 
 .tarjeta h3 {
@@ -260,7 +281,7 @@ button.boton {
 .tarjeta ul {
   list-style: none;
   padding: 0;
-  margin: 0 0 24px;
+  margin: 0 0 16px;
 }
 
 .tarjeta li {
@@ -268,6 +289,7 @@ button.boton {
   padding-left: 26px;
   margin-bottom: 10px;
   font-size: 15px;
+  line-height: 1.4;
 }
 
 .tarjeta li::before {
@@ -278,10 +300,55 @@ button.boton {
   color: var(--principal);
 }
 
-.tarjeta .boton {
-  margin-top: auto;
+.pista {
+  margin: auto 0 0;
+  font-size: 13px;
+  color: #6b7a86;
+}
+
+/* ----- Cara de atrás (foto + Cotiza ya) ----- */
+.reverso {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--oscuro);
+}
+
+.reverso::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(11, 31, 58, 0.92), rgba(11, 31, 58, 0.2));
+}
+
+.reverso > * {
+  position: relative;
+}
+
+.reverso h3 {
+  color: white;
+}
+
+.reverso .boton {
   display: block;
   text-align: center;
+}
+
+.reverso-web {
+  background-image: url("img/tarjeta-web.jpg");
+}
+
+.reverso-inventario {
+  background-image: url("img/tarjeta-inventario.jpg");
+}
+
+.reverso-grado {
+  background-image: url("img/tarjeta-grado.jpg");
 }
 
 /* ========== DEMO DE INVENTARIO ========== */
@@ -366,12 +433,8 @@ input, textarea {
     scroll-behavior: auto;
   }
 
-  .tarjeta,
-  .tarjeta:hover,
-  .icono,
-  .tarjeta:hover .icono {
+  .tarjeta-interior {
     transition: none;
-    transform: none;
   }
 }
 
