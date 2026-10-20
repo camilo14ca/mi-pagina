@@ -56,3 +56,22 @@ botonEnviar.addEventListener("click", function () {
 
   window.open(enlace, "_blank");
 });
+
+
+// ===== MENÚ EN CELULAR =====
+const botonMenu = document.getElementById("menu-boton");
+const menuNav = document.getElementById("menu-nav");
+
+botonMenu.addEventListener("click", function () {
+  const abierto = menuNav.classList.toggle("abierto");
+  botonMenu.setAttribute("aria-expanded", abierto);
+  botonMenu.textContent = abierto ? "✕" : "☰";
+});
+
+menuNav.addEventListener("click", function (evento) {
+  if (evento.target.tagName === "A") {
+    menuNav.classList.remove("abierto");
+    botonMenu.setAttribute("aria-expanded", "false");
+    botonMenu.textContent = "☰";
+  }
+});

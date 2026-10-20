@@ -62,7 +62,7 @@ a {
 .menu-contenido {
   max-width: 900px;
   margin: 0 auto;
-  padding: 14px 20px;
+  padding: 12px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -75,20 +75,51 @@ a {
   text-decoration: none;
 }
 
-.menu nav a {
-  margin-left: 16px;
-}
-
-.menu nav a:hover {
-  color: var(--acento);
-}
-
 .logo {
   display: flex;
   align-items: center;
   gap: 10px;
   font-weight: bold;
   font-size: 20px;
+}
+
+.menu-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.menu-nav a {
+  padding: 8px 16px;
+  border-radius: 999px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.menu-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.14);
+  color: var(--acento);
+}
+
+.menu-nav a.destacado {
+  background-color: var(--acento);
+  color: var(--oscuro);
+  font-weight: bold;
+}
+
+.menu-nav a.destacado:hover {
+  background-color: #e0a000;
+  color: var(--oscuro);
+}
+
+.menu-boton {
+  display: none;
+  background: transparent;
+  color: white;
+  font-size: 24px;
+  line-height: 1;
+  padding: 6px 12px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 /* ========== SECCIONES ========== */
@@ -367,5 +398,26 @@ input, textarea {
   .boton {
     display: block;
     text-align: center;
+  }
+
+  .menu-boton {
+    display: block;
+  }
+
+  .menu-nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    padding-bottom: 8px;
+  }
+
+  .menu-nav.abierto {
+    display: flex;
+  }
+
+  .menu-nav a {
+    padding: 14px 16px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.08);
   }
 }
