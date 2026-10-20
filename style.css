@@ -91,12 +91,13 @@ a {
 .menu-nav a {
   padding: 8px 16px;
   border-radius: 999px;
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .menu-nav a:hover {
-  background-color: rgba(255, 255, 255, 0.14);
-  color: var(--acento);
+  background-color: var(--acento);
+  color: var(--oscuro);
+  transform: translateY(-3px);
 }
 
 .menu-nav a.destacado {
@@ -108,6 +109,7 @@ a {
 .menu-nav a.destacado:hover {
   background-color: #e0a000;
   color: var(--oscuro);
+  transform: translateY(-3px);
 }
 
 .menu-boton {
