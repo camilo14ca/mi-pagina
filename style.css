@@ -29,7 +29,7 @@ section {
 .contenedor {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 48px 20px;
+  padding: 48px 20px 96px;
 }
 
 h1 {
@@ -214,7 +214,41 @@ a {
   background-color: var(--fondo);
 }
 
+/* ----- Bordes ondeados entre secciones (script.js cambia --curva al hacer scroll) ----- */
+.seccion-blanca,
+.seccion-clara {
+  position: relative;
+}
+
+.seccion-blanca::after,
+.seccion-clara::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: var(--curva, 24px);
+  box-sizing: border-box;
+  border-top: 3px solid var(--acento);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  pointer-events: none;
+}
+
+.seccion-blanca::after {
+  background-color: var(--fondo);   /* el color de la sección que viene */
+}
+
+.seccion-clara::after {
+  background-color: white;
+}
+
+.seccion-clara.sin-curva::after {
+  display: none;                     /* después de esta va Contacto, que se curva solo */
+}
+
 .seccion-oscura {
+  border-top: 3px solid var(--acento);
+  border-radius: 50% 50% 0 0 / var(--curva, 24px) var(--curva, 24px) 0 0;
   background-image:
     linear-gradient(rgba(11, 31, 58, 0.88), rgba(11, 31, 58, 0.88)),
     url("img/contacto.jpg");
@@ -226,6 +260,10 @@ a {
 
 .seccion-oscura h2 {
   color: white;
+}
+
+.seccion-oscura .contenedor {
+  padding-bottom: 56px;
 }
 
 /* ========== QUIÉNES SOMOS ========== */
@@ -792,7 +830,7 @@ input, textarea {
   }
 
   .contenedor {
-    padding: 32px 16px;
+    padding: 32px 16px 72px;
   }
 
   .hero .contenedor {

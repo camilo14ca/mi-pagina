@@ -50,6 +50,7 @@ console.log("Hola, Logik Pragma");
   const barra = document.getElementById("progreso");
   const menu = document.querySelector(".menu");
   const hero = document.querySelector(".hero");
+  const seccionesCurvas = document.querySelectorAll(".seccion-blanca, .seccion-clara, .seccion-oscura");
   const curvaRelleno = document.getElementById("curva-relleno");
   const curvaLinea = document.getElementById("curva-linea");
   const textosHero = hero.querySelectorAll("h1, p, .boton");
@@ -88,6 +89,18 @@ console.log("Hola, Logik Pragma");
     const curva = "M0,100 Q720," + control + " 1440,100";
     curvaLinea.setAttribute("d", curva);
     curvaRelleno.setAttribute("d", curva + " Z");
+
+    // Bordes ondeados de las demás secciones: se curvan más mientras pasan por la pantalla
+    if (!sinMovimiento) {
+      const alto = window.innerHeight;
+      seccionesCurvas.forEach(function (seccion) {
+        const caja = seccion.getBoundingClientRect();
+        // Contacto se curva por arriba; las demás por abajo
+        const borde = seccion.classList.contains("seccion-oscura") ? caja.top : caja.bottom;
+        const t = Math.min(1, Math.max(0, 1 - borde / alto));
+        seccion.style.setProperty("--curva", (24 + 40 * t) + "px");
+      });
+    }
 
     // Al volver arriba, el texto del inicio vuelve a entrar
     if (y > hero.offsetHeight * 0.6) {
