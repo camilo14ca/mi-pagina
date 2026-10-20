@@ -57,7 +57,6 @@ botonEnviar.addEventListener("click", function () {
   window.open(enlace, "_blank");
 });
 
-
 // ===== MENÚ EN CELULAR =====
 const botonMenu = document.getElementById("menu-boton");
 const menuNav = document.getElementById("menu-nav");
