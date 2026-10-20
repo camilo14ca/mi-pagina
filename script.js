@@ -84,7 +84,7 @@ console.log("Hola, Logik Pragma");
 
     // El corte azul/blanco se curva más cuanto más bajas (y se aplana al subir)
     const progreso = Math.min(1, y / (hero.offsetHeight * 0.8));
-    const profundidad = 25 + 55 * progreso;           // 25 arriba -> 80 abajo
+    const profundidad = 15 + 35 * progreso;           // 15 arriba -> 50 abajo
     const control = 100 - 2 * profundidad;
     const curva = "M0,100 Q720," + control + " 1440,100";
     curvaLinea.setAttribute("d", curva);
@@ -98,7 +98,7 @@ console.log("Hola, Logik Pragma");
         // Contacto se curva por arriba; las demás por abajo
         const borde = seccion.classList.contains("seccion-oscura") ? caja.top : caja.bottom;
         const t = Math.min(1, Math.max(0, 1 - borde / alto));
-        seccion.style.setProperty("--curva", (24 + 40 * t) + "px");
+        seccion.style.setProperty("--curva", (16 + 22 * t) + "px");
       });
     }
 

@@ -227,9 +227,9 @@ a {
   left: 0;
   right: 0;
   bottom: -1px;
-  height: var(--curva, 24px);
+  height: var(--curva, 16px);
   box-sizing: border-box;
-  border-top: 3px solid var(--acento);
+  border-top: 2px solid var(--acento);
   border-radius: 50% 50% 0 0 / 100% 100% 0 0;
   pointer-events: none;
 }
@@ -242,13 +242,33 @@ a {
   background-color: white;
 }
 
+/* Curva hacia ABAJO: la sección "cuelga" una curva sobre la siguiente */
+.seccion-blanca.curva-abajo::after {
+  top: calc(100% - 1px);
+  bottom: auto;
+  height: calc(var(--curva, 16px) + 1px);
+  background-color: white;
+  border-top: none;
+  border-bottom: 2px solid var(--acento);
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  z-index: 1;
+}
+
+.curva-abajo .contenedor {
+  padding-bottom: 56px;
+}
+
+.curva-abajo + section .contenedor {
+  padding-top: 88px;
+}
+
 .seccion-clara.sin-curva::after {
   display: none;                     /* después de esta va Contacto, que se curva solo */
 }
 
 .seccion-oscura {
-  border-top: 3px solid var(--acento);
-  border-radius: 50% 50% 0 0 / var(--curva, 24px) var(--curva, 24px) 0 0;
+  border-top: 2px solid var(--acento);
+  border-radius: 50% 50% 0 0 / var(--curva, 16px) var(--curva, 16px) 0 0;
   background-image:
     linear-gradient(rgba(11, 31, 58, 0.88), rgba(11, 31, 58, 0.88)),
     url("img/contacto.jpg");
