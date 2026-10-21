@@ -6,7 +6,8 @@ console.log("Hola, Logik Pragma");
 
   // 1) Elementos que aparecen al llegar a ellos
   const lista = document.querySelectorAll(
-    ".encabezado, .nosotros-texto, .foto, .tarjeta, .mas-proyectos, " +
+    ".encabezado, .nosotros-texto, .foto, .ceo, .tarjeta, .mas-proyectos, " +
+    ".proyecto, .tecnologias, .testimonio, .faq details, " +
     ".tablero, .llamado, .flujo-sub, .paso, .retorno, .seccion-blanca h2, .tarjeta-form, .seccion-oscura h2, .contenedor > p"
   );
 
