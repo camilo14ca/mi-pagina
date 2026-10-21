@@ -7,7 +7,7 @@ console.log("Hola, Logik Pragma");
   // 1) Elementos que aparecen al llegar a ellos
   const lista = document.querySelectorAll(
     ".encabezado, .nosotros-texto, .foto, .tarjeta, .mas-proyectos, " +
-    ".cifras, .flujo-sub, .paso, .retorno, .seccion-blanca h2, .demo, .tarjeta-form, .seccion-oscura h2, .contenedor > p"
+    ".tablero, .llamado, .flujo-sub, .paso, .retorno, .seccion-blanca h2, .tarjeta-form, .seccion-oscura h2, .contenedor > p"
   );
 
   lista.forEach(function (elemento) {
@@ -122,43 +122,6 @@ console.log("Hola, Logik Pragma");
   window.animacionesListas = true;
 })();
 
-// ===== DEMO DE INVENTARIO =====
-const STOCK_MINIMO = 3;
-let stock = 10;
-
-const textoStock = document.getElementById("stock");
-const aviso = document.getElementById("aviso");
-const botonVender = document.getElementById("vender");
-const botonReponer = document.getElementById("reponer");
-
-function mostrarStock() {
-  if (stock === 0) {
-    textoStock.textContent = "Agotado";
-  } else {
-    textoStock.textContent = stock;
-  }
-
-  if (stock <= STOCK_MINIMO) {
-    aviso.textContent = "Stock bajo, quedan solo " + stock;
-  } else {
-    aviso.textContent = "";
-  }
-}
-
-botonVender.addEventListener("click", function () {
-  if (stock > 0) {
-    stock = stock - 1;
-    mostrarStock();
-  }
-});
-
-botonReponer.addEventListener("click", function () {
-  stock = stock + 1;
-  mostrarStock();
-});
-
-mostrarStock();
-
 // ===== FORMULARIO -> WHATSAPP =====
 const campoNombre = document.getElementById("nombre");
 const campoNecesidad = document.getElementById("necesidad");
@@ -246,4 +209,18 @@ tarjetas.forEach(function (tarjeta) {
   }, { threshold: [0, 0.5] });
 
   numeros.forEach(function (n) { texto(n, 0); observador.observe(n); });
+})();
+
+// ===== TABLERO: resaltar un grupo al pasar el mouse =====
+(function () {
+  const tablero = document.getElementById("tablero");
+  if (!tablero) return;
+
+  function activar(nombre) { tablero.dataset.activo = nombre; }
+  function desactivar() { delete tablero.dataset.activo; }
+
+  tablero.querySelectorAll("[data-seg]").forEach(function (elemento) {
+    elemento.addEventListener("mouseenter", function () { activar(elemento.dataset.seg); });
+    elemento.addEventListener("mouseleave", desactivar);
+  });
 })();

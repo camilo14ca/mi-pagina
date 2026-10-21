@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIK PRAGMA</title>
-    <link rel="stylesheet" href="style.css?v=10">
+    <link rel="stylesheet" href="style.css?v=11">
     <script>
         // Avisa al CSS que hay JavaScript (para las animaciones al hacer scroll)
         document.documentElement.classList.add("js");
@@ -72,24 +72,6 @@
                 <img class="foto" src="img/nosotros.jpg" alt="Desarrollador trabajando frente a su computador">
             </div>
 
-            <!-- CIFRAS (cambia solo los números reales en data-valor) -->
-            <div class="cifras">
-                <h3 class="cifras-titulo">Logik Pragma en cifras</h3>
-                <div class="cifras-grid">
-                    <div class="kpi">
-                        <strong class="kpi-num" data-valor="8">0</strong>
-                        <span class="kpi-txt">Clientes atendidos</span>
-                    </div>
-                    <div class="kpi">
-                        <strong class="kpi-num" data-valor="3">0</strong>
-                        <span class="kpi-txt">Tipos de proyecto: páginas web, inventarios y software de grado</span>
-                    </div>
-                    <div class="kpi">
-                        <strong class="kpi-num" data-valor="50" data-sufijo="%">0</strong>
-                        <span class="kpi-txt">Pagas al iniciar y el otro 50% al entregar</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -209,20 +191,60 @@
         </div>
     </section>
 
-    <!-- DEMO -->
-    <section class="seccion-clara sin-curva">
+    <!-- CLIENTES: TABLERO -->
+    <section id="clientes" class="seccion-clara sin-curva">
         <div class="contenedor">
-            <h2>Demo de inventario</h2>
-            <p>Así funciona un sistema de inventario. Prueba vender y reponer, y mira cómo avisa cuando queda poco stock.</p>
+            <div class="encabezado">
+                <span class="etiqueta">Nuestra experiencia</span>
+                <h2>Nuestros clientes en números</h2>
+                <p>Contamos con 8 clientes. Así se reparten sus proyectos y lo que pidió cada uno.</p>
+            </div>
 
-            <div class="demo">
-                <p class="demo-producto">Hamburguesas disponibles</p>
-                <strong id="stock">10</strong>
-                <p id="aviso"></p>
-                <div class="demo-botones">
-                    <button class="boton" id="vender">Vender 1</button>
-                    <button class="boton boton-secundario" id="reponer">Reponer 1</button>
+            <div class="tablero" id="tablero">
+                <div class="dona">
+                    <svg viewBox="0 0 200 200" role="img" aria-label="Gráfico circular: 4 sistemas de inventario, 2 proyectos de grado y 2 páginas web">
+                        <circle class="pista-dona" cx="100" cy="100" r="70" />
+                        <circle class="seg seg-inventario" data-seg="inventario" cx="100" cy="100" r="70" style="--len:219.91px; --start:0px" />
+                        <circle class="seg seg-grado" data-seg="grado" cx="100" cy="100" r="70" style="--len:109.96px; --start:219.91px" />
+                        <circle class="seg seg-web" data-seg="web" cx="100" cy="100" r="70" style="--len:109.96px; --start:329.87px" />
+                    </svg>
+                    <div class="dona-centro">
+                        <strong class="kpi-num" data-valor="8">0</strong>
+                        <span>clientes</span>
+                    </div>
                 </div>
+
+                <ul class="leyenda">
+                    <li class="leyenda-item" data-seg="inventario">
+                        <span class="punto punto-inventario"></span>
+                        <div>
+                            <strong>4 sistemas de inventario <em>50%</em></strong>
+                            <p>Pidieron controlar sus productos, registrar entradas y salidas y recibir alertas de stock bajo.</p>
+                            <div class="barra"><span style="--pct:50%" class="barra-inventario"></span></div>
+                        </div>
+                    </li>
+                    <li class="leyenda-item" data-seg="grado">
+                        <span class="punto punto-grado"></span>
+                        <div>
+                            <strong>2 proyectos de grado <em>25%</em></strong>
+                            <p>Necesitaban un software a la medida de su idea, con acompañamiento durante el desarrollo.</p>
+                            <div class="barra"><span style="--pct:25%" class="barra-grado"></span></div>
+                        </div>
+                    </li>
+                    <li class="leyenda-item" data-seg="web">
+                        <span class="punto punto-web"></span>
+                        <div>
+                            <strong>2 páginas web <em>25%</em></strong>
+                            <p>Querían presencia en internet: una página que se vea bien en celular y con botón de WhatsApp.</p>
+                            <div class="barra"><span style="--pct:25%" class="barra-web"></span></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mas-proyectos">
+                <p class="llamado">¿Quieres ser el cliente número 9?</p>
+                <a class="boton" href="https://wa.me/573212474073?text=Hola%2C%20quiero%20empezar%20mi%20proyecto">Cuéntanos tu idea</a>
             </div>
         </div>
     </section>
@@ -244,7 +266,7 @@
         </div>
     </section>
 
-    <script src="script.js?v=10"></script>
+    <script src="script.js?v=11"></script>
 </body>
 
 </html>

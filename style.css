@@ -308,64 +308,6 @@ a {
   border-radius: 12px;
 }
 
-/* ========== CIFRAS (panel tipo dashboard) ========== */
-.cifras {
-  margin-top: 56px;
-  padding: 28px;
-  background-color: var(--oscuro);
-  color: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 28px rgba(11, 31, 58, 0.25);
-}
-
-.cifras-titulo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 20px;
-  font-size: 14px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.cifras-titulo::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  background-color: var(--acento);
-  border-radius: 50%;
-}
-
-.cifras-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 16px;
-}
-
-.kpi {
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-}
-
-.kpi-num {
-  display: block;
-  font-size: 52px;
-  line-height: 1.1;
-  color: var(--acento);
-  font-variant-numeric: tabular-nums;
-}
-
-.kpi-txt {
-  display: block;
-  margin-top: 8px;
-  font-size: 15px;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.85);
-}
-
 /* ========== BOTONES ========== */
 .boton {
   background-color: var(--acento);
@@ -715,62 +657,168 @@ button.boton {
   white-space: nowrap;
 }
 
-/* ========== DEMO DE INVENTARIO ========== */
-.demo {
+/* ========== TABLERO DE CLIENTES (gráfico circular) ========== */
+.tablero {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 32px;
   background-color: white;
-  max-width: 360px;
-  margin-top: 24px;
-  padding: 24px;
-  text-align: center;
   border-top: 4px solid var(--principal);
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(11, 31, 58, 0.1);
 }
 
-.demo-producto {
-  margin: 0;
+.dona {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.dona svg {
+  display: block;
+  width: 100%;
+  transform: rotate(-90deg);          /* el gráfico empieza arriba */
+}
+
+.dona circle {
+  fill: none;
+  stroke-width: 28;
+}
+
+.pista-dona {
+  stroke: #e8eeee;
+}
+
+.seg {
+  stroke-dasharray: calc(var(--len) - 3px) 440px;
+  stroke-dashoffset: calc(var(--start) * -1);
+  transition: stroke-dasharray 1s ease, opacity 0.2s;
+  cursor: pointer;
+}
+
+.seg-inventario { stroke: var(--principal); }
+.seg-grado { stroke: var(--acento); }
+.seg-web { stroke: var(--medio); }
+
+/* Se dibuja al aparecer (solo si hay JavaScript) */
+.js .tablero:not(.visible) .seg {
+  stroke-dasharray: 0 440px;
+}
+
+.dona-centro {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.dona-centro .kpi-num {
+  font-size: 64px;
+  line-height: 1;
+  color: var(--oscuro);
+  font-variant-numeric: tabular-nums;
+}
+
+.dona-centro span {
+  font-size: 16px;
   color: #5a6b67;
 }
 
-#stock {
-  display: block;
-  margin: 8px 0 16px;
-  font-size: 56px;
-  color: var(--oscuro);
-}
-
-#aviso {
-  margin: 0 0 16px;
-  padding: 8px 12px;
-  background-color: #fff1d6;
-  color: #8a4b00;
-  font-weight: bold;
-  border-radius: 6px;
-}
-
-#aviso:empty {
-  display: none;
-}
-
-.demo-botones {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.demo-botones button {
+.leyenda {
+  list-style: none;
   margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 22px;
 }
 
-button.boton-secundario {
-  background-color: white;
+.leyenda-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: opacity 0.2s;
+}
+
+.leyenda-item strong {
+  font-size: 18px;
   color: var(--oscuro);
-  border: 2px solid var(--oscuro);
 }
 
-button.boton-secundario:hover {
-  background-color: var(--fondo);
+.leyenda-item em {
+  margin-left: 6px;
+  font-style: normal;
+  font-size: 14px;
+  color: #5a6b67;
+}
+
+.leyenda-item p {
+  margin: 4px 0 8px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #44514e;
+}
+
+.punto {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+
+.punto-inventario { background-color: var(--principal); }
+.punto-grado { background-color: var(--acento); }
+.punto-web { background-color: var(--medio); }
+
+.barra {
+  height: 8px;
+  background-color: #e8eeee;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.barra span {
+  display: block;
+  height: 100%;
+  width: var(--pct);
+  border-radius: 8px;
+  transition: width 1s ease 0.2s;
+}
+
+.js .tablero:not(.visible) .barra span {
+  width: 0;
+}
+
+.barra-inventario { background-color: var(--principal); }
+.barra-grado { background-color: var(--acento); }
+.barra-web { background-color: var(--medio); }
+
+/* Al pasar el mouse por un grupo, los demás se atenúan */
+.tablero[data-activo] .seg,
+.tablero[data-activo] .leyenda-item {
+  opacity: 0.3;
+}
+
+.tablero[data-activo="inventario"] .seg-inventario,
+.tablero[data-activo="grado"] .seg-grado,
+.tablero[data-activo="web"] .seg-web,
+.tablero[data-activo="inventario"] .leyenda-item[data-seg="inventario"],
+.tablero[data-activo="grado"] .leyenda-item[data-seg="grado"],
+.tablero[data-activo="web"] .leyenda-item[data-seg="web"] {
+  opacity: 1;
+}
+
+.llamado {
+  margin: 0 0 16px;
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--oscuro);
 }
 
 /* ========== FORMULARIO ========== */
@@ -841,6 +889,11 @@ input, textarea {
     scroll-behavior: auto;
   }
 
+  .seg,
+  .barra span {
+    transition: none;
+  }
+
   .tarjeta-interior,
   .paso,
   .paso:hover {
@@ -881,6 +934,12 @@ input, textarea {
     left: 50%;
     width: auto;
     transform: translateX(-50%);
+  }
+
+  .tablero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 24px 18px;
   }
 
   .retorno {
